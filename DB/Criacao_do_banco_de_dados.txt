@@ -1,0 +1,44 @@
+use tecinv;
+
+create table usuario(
+  id int AUTO_INCREMENT not null,
+  nome varchar(50) not null,
+  email varchar(50) unique not null,
+  senha varchar(50) not null,
+  PRIMARY key (id)
+);
+
+create table categoria_equipamento(
+  id int AUTO_INCREMENT not null,
+  usuario_id int not null,
+  nome_categoria varchar(50) unique null,
+  PRIMARY key (id),
+  FOREIGN key (usuario_id) REFERENCES usuario(id)
+ );
+ 
+CREATE table secretaria(
+  id int AUTO_INCREMENT not null,
+  usuario_id int not null,
+  nome_secretaria varchar(50) unique not null,
+  PRIMARY key (id),
+  FOREIGN key (usuario_id) REFERENCES usuario(id)
+  );
+ 
+ CREATE table equipamentos_tecnologicos(
+   id int AUTO_INCREMENT not null,
+   usuario_id int not null,
+   categoria_id int not null,
+   secretaria_id int not null,
+   fabricante varchar(50) not null,
+   modelo varchar(50) not null,
+   num_patrimonio varchar(50) unique not null,
+   responsavel varchar(50) not null,
+   setor varchar(50) not null,
+   especificacoes varchar(50) not null,
+   observacoes varchar(100) null,
+   PRIMARY key (id),
+   FOREIGN key (usuario_id) REFERENCES usuario(id),
+   FOREIGN key (categoria_id) REFERENCES categoria_equipamento(id),
+   FOREIGN key (secretaria_id) REFERENCES secretaria(id)
+   );
+   
