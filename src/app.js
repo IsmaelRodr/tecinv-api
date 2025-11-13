@@ -2,7 +2,7 @@ const express = require('express');
 const app = express();
 const usuarioRoutes = require("./routes/usuario.routes");
 const categoriaRoutes = require("./routes/categoria_equipamento.routes");
-// const transacaoRoutes = require("./routes/transacao.routes");
+const secretariaRoutes = require("./routes/secretaria.routes");
 // const saldoPorCategoriasRoutes = require("./routes/saldo-por-categoria.routes");
 // const transacoesPorCategoriasRoutes = require("./routes/transacoes-por-categoria.routes");
 const sequelize = require("./config/database");
@@ -11,7 +11,7 @@ app.use(express.json());
 
 app.use('/usuario', usuarioRoutes);
 app.use('/categoriaequipamento', categoriaRoutes);
-// app.use('/transacao', transacaoRoutes);
+app.use('/secretaria', secretariaRoutes);
 // app.use('/saldoporcategoria', saldoPorCategoriasRoutes);
 // app.use('/transacaoporcategoria', transacoesPorCategoriasRoutes);
 

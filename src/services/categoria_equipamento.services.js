@@ -4,9 +4,8 @@ exports.listar = async () => {
     return await categoria_equipamento.findAll();
 }
 
-exports.criar = async (usuario_id, nome_categoria) => {
+exports.criar = async (nome_categoria) => {
     const novaCategoria = await categoria_equipamento.create({
-        usuario_id: usuario_id,
         nome_categoria: nome_categoria
     });
     return {

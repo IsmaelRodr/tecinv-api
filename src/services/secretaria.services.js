@@ -4,9 +4,8 @@ exports.listar = async () => {
     return await secretaria.findAll();
 }
 
-exports.criar = async (usuario_id, nome_secretaria) => {
+exports.criar = async (nome_secretaria) => {
     const novaSecretaria = await secretaria.create({
-        usuario_id: usuario_id,
         nome_secretaria: nome_secretaria
     });
     return {

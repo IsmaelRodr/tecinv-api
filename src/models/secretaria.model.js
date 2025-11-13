@@ -7,17 +7,11 @@ const secretaria = sequelize.define('secretaria', {
         autoIncrement: true,
         primaryKey: true
     },
-    id_usuario: {
-        type: DataTypes.INTEGER,
-        allowNull: false,
-        foreingKey: true
-        
-    },
     nome_secretaria: {
         type: DataTypes.STRING(50),
         allowNull: false,
         unique: true
-    },
+    }
 
   }, {
     tableName: 'secretaria',

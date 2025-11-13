@@ -10,21 +10,17 @@ create table usuario(
 
 create table categoria_equipamento(
   id int AUTO_INCREMENT not null,
-  usuario_id int not null,
   nome_categoria varchar(50) unique null,
-  PRIMARY key (id),
-  FOREIGN key (usuario_id) REFERENCES usuario(id)
+  PRIMARY key (id)
  );
  
 CREATE table secretaria(
   id int AUTO_INCREMENT not null,
-  usuario_id int not null,
   nome_secretaria varchar(50) unique not null,
-  PRIMARY key (id),
-  FOREIGN key (usuario_id) REFERENCES usuario(id)
+  PRIMARY key (id)
   );
  
- CREATE table equipamentos_tecnologicos(
+ CREATE table equipamento_tecnologico(
    id int AUTO_INCREMENT not null,
    usuario_id int not null,
    categoria_id int not null,
@@ -41,4 +37,3 @@ CREATE table secretaria(
    FOREIGN key (categoria_id) REFERENCES categoria_equipamento(id),
    FOREIGN key (secretaria_id) REFERENCES secretaria(id)
    );
-   
