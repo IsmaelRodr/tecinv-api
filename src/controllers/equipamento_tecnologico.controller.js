@@ -1,4 +1,4 @@
-const equipamentoTecnologicoService = require("../services/equipamento_tecnologico.services")
+const equipamentoTecnologicoService = require("../services/equipamento_tecnologico.sevices")
 
 exports.buscarEquipamentos = async (req, res) => {
     const equipamentos = await equipamentoTecnologicoService.listar();
