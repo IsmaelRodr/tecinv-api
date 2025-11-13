@@ -48,13 +48,28 @@ exports.buscarUsuarioPorId = async (req, res) => {
 }
 
 exports.atualizarUsuario = async (req, res) => {
-  const usuario = await usuarioService.atualizar(req.params.id, req.body);
-  if (usuario) {
-    res.status(200).json(usuario);
-  } else {
-    res.status(404).json({ mensagem: 'Usuário não encontrado' });
+  try {
+    const { senha, ...outrosDados } = req.body;
+
+    // Se a senha foi enviada, criptografa antes de atualizar
+    if (senha) {
+      const hashSenha = await bcrypt.hash(senha, 10);
+      outrosDados.senha = hashSenha;
+    }
+
+    const usuario = await usuarioService.atualizar(req.params.id, outrosDados);
+
+    if (usuario) {
+      res.status(200).json({ mensagem: "Usuário atualizado com sucesso", usuario });
+    } else {
+      res.status(404).json({ mensagem: 'Usuário não encontrado' });
+    }
+  } catch (erro) {
+    console.error("❌ Erro ao atualizar usuário:", erro);
+    res.status(500).json({ mensagem: 'Erro interno ao atualizar o usuário' });
   }
-}
+};
+
 
 exports.deletarUsuario = async (req, res) => {
   const sucesso = await usuarioService.deletar(req.params.id);

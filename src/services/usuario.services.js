@@ -8,13 +8,17 @@ exports.listar = async () => {
 }
 
 exports.cadastrar = async (nomeUsuario, emailUsuario, senhaUsuario) => {
-  const novoUsuario = await Usuario.create({
-    nome: nomeUsuario,
-    email: emailUsuario,
-    senha: senhaUsuario,
-  });
-
-  return novoUsuario;
+  try {
+    const novoUsuario = await Usuario.create({
+      nome: nomeUsuario,
+      email: emailUsuario,
+      senha: senhaUsuario,
+    });
+    return novoUsuario;
+  } catch (error) {
+    console.error("❌ Erro ao cadastrar usuário:", error);
+    throw error;
+  }
 };
 
 exports.buscarPorId = async (id) => {
