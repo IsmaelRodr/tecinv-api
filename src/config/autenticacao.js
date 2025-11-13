@@ -1,5 +1,5 @@
 const jwt = require('jsonwebtoken');
-require('dotenv').config();
+require('dotenv').config({ path: require('path').resolve(__dirname, '../../.env') });
 
 const autenticacao = (req, res, proximoPasso) => {
     const token = req.headers['authorization'];

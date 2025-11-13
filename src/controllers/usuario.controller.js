@@ -1,7 +1,7 @@
 const usuarioService = require("../services/usuario.services")
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
-require('dotenv').config();
+require('dotenv').config({ path: require('path').resolve(__dirname, '../../.env') });
 
 exports.buscarUsuarios = async (req, res) => {
     const usuarios = await usuarioService.listar();
