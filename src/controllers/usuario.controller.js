@@ -47,35 +47,41 @@ exports.buscarUsuarioPorId = async (req, res) => {
     }
 }
 
-exports.atualizarUsuario = async (req, res) => {
+exports.atualizarSenha = async (req, res) => {
   try {
-    const { senha, ...outrosDados } = req.body;
+    const { senha } = req.body;
 
-    // Se a senha foi enviada, criptografa antes de atualizar
-    if (senha) {
-      const hashSenha = await bcrypt.hash(senha, 10);
-      outrosDados.senha = hashSenha;
+    if (!senha) {
+      return res.status(400).json({ mensagem: "A nova senha é obrigatória." });
     }
 
-    const usuario = await usuarioService.atualizar(req.params.id, outrosDados);
+    const hash = await bcrypt.hash(senha, 10);
 
-    if (usuario) {
-      res.status(200).json({ mensagem: "Usuário atualizado com sucesso", usuario });
-    } else {
-      res.status(404).json({ mensagem: 'Usuário não encontrado' });
+    const usuario = await usuarioService.atualizar(req.params.id, { senha: hash });
+
+    if (!usuario) {
+      return res.status(404).json({ mensagem: "Usuário não encontrado" });
     }
+
+    res.status(200).json({ mensagem: "Senha atualizada com sucesso" });
+
   } catch (erro) {
-    console.error("❌ Erro ao atualizar usuário:", erro);
-    res.status(500).json({ mensagem: 'Erro interno ao atualizar o usuário' });
+    res.status(500).json({ mensagem: "Erro ao atualizar a senha" });
   }
 };
 
-
 exports.deletarUsuario = async (req, res) => {
-  const sucesso = await usuarioService.deletar(req.params.id);
-  if (sucesso) {
-    res.status(204).send();
-  } else {
-    res.status(404).json({ mensagem: 'Usuário não encontrado' });
+  try {
+    const sucesso = await usuarioService.deletar(req.params.id);
+
+    if (!sucesso) {
+      return res.status(404).json({ mensagem: 'Usuário não encontrado' });
+    }
+
+    return res.status(200).json({ mensagem: 'Usuário deletado com sucesso' });
+
+  } catch (error) {
+    console.error("❌ Erro ao deletar usuário:", error);
+    return res.status(500).json({ mensagem: 'Erro interno ao deletar usuário' });
   }
-}
+};

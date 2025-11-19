@@ -7,8 +7,7 @@ router.get('/', autenticacao, usuarioController.buscarUsuarios);
 router.get('/:id', autenticacao, usuarioController.buscarUsuarioPorId);
 router.post('/', usuarioController.cadastrarUsuario);
 router.post('/login', usuarioController.login);
-router.put('/:id', autenticacao, usuarioController.atualizarUsuario);
+router.put('/:id/senha', autenticacao, usuarioController.atualizarSenha);
 router.delete('/:id', autenticacao, usuarioController.deletarUsuario);
-
 
 module.exports = router;

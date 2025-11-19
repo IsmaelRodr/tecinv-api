@@ -23,32 +23,32 @@ const equipamento_tecnologico = sequelize.define('equipamento_tecnologico', {
         foreingKey: true
     },
     fabricante: {
-        type: DataTypes.STRING(50),
+        type: DataTypes.STRING(100),
         allowNull: false,
     },
     modelo: {
-        type: DataTypes.STRING(50),
+        type: DataTypes.STRING(100),
         allowNull: false,
     },
     num_patrimonio: {
-        type: DataTypes.STRING(50),
+        type: DataTypes.STRING(100),
         allowNull: false,
         unique: true
     },
     responsavel: {
-        type: DataTypes.STRING(50),
+        type: DataTypes.STRING(100),
         allowNull: false,
     },
     setor: {
-        type: DataTypes.STRING(50),
+        type: DataTypes.STRING(100),
         allowNull: false,
     },
     especificacoes: {
-        type: DataTypes.STRING(50),
+        type: DataTypes.TEXT,
         allowNull: false,
     },
     observacoes: {
-        type: DataTypes.STRING(100),
+        type: DataTypes.TEXT,
         allowNull: true,
     }
 

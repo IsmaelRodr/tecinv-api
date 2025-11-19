@@ -8,7 +8,7 @@ const secretaria = sequelize.define('secretaria', {
         primaryKey: true
     },
     nome_secretaria: {
-        type: DataTypes.STRING(50),
+        type: DataTypes.STRING(100),
         allowNull: false,
         unique: true
     }
